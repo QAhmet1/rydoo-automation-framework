@@ -33,6 +33,10 @@ jobs:
             -e GITHUB_ACTIONS=true \
             -e GITHUB_ACTOR=${{ github.actor }} \
             -e GITHUB_REPOSITORY=${{ github.repository }} \
+            -e QA_USER=${{ secrets.QA_USER }} \
+            -e QA_PASS=${{ secrets.QA_PASS }} \
+            -e PROD_USER=${{ secrets.PROD_USER }} \
+            -e PROD_PASS=${{ secrets.PROD_PASS }} \
             rydoo-automation
         continue-on-error: true # Crucial: Generate report even if tests fail
 

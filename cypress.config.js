@@ -34,9 +34,23 @@ module.exports = defineConfig({
   // 2. Load the specific JSON file (prod.json or qa.json)
   const envConfig = await getConfigurationByFile(version);
 
-  // 3. MERGE STRATEGY: 
+  // 3. MERGE STRATEGY:
   // We prioritize the specific environment file, but KEEP the CLI arguments like envName
   config.env = { ...config.env, ...envConfig };
+
+  // 3b. Optionally enrich environment with secrets from the host (useful in CI)
+  const secretEnv = {
+    qa_user: process.env.QA_USER,
+    qa_pass: process.env.QA_PASS,
+    prod_user: process.env.PROD_USER,
+    prod_pass: process.env.PROD_PASS,
+  };
+
+  Object.entries(secretEnv).forEach(([key, value]) => {
+    if (value) {
+      config.env[key] = value;
+    }
+  });
 
   // 4. Force override baseUrl from the loaded file
   config.baseUrl = envConfig.baseUrl;
@@ -44,7 +58,7 @@ module.exports = defineConfig({
   console.log('--- FINAL ENV CHECK ---');
   // Use brackets to avoid deprecation warnings
   console.log('Environment:', version);
-  console.log('Email:', config.env[`${version}_user`]); 
+  console.log('Email:', config.env[`${version}_user`]);
   console.log('-----------------------');
 
   allureWriter(on, config);

@@ -65,7 +65,7 @@ Cypress.Commands.add('verifySecurityBlock', (email) => {
 });
 
 // 4. Optimized Command for Happy Path Simulation
-Cypress.Commands.add('login', (email, password) => {
+Cypress.Commands.add('login_func', (email, password) => {
     // Ensuring we are on the correct domain before starting
     cy.url({ timeout: 20000 }).should('include', 'accounts.rydoo.com');
 

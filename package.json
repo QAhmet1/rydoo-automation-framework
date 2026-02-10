@@ -26,7 +26,7 @@
     "full:prod": "npm run docker:build && npm run docker:run:prod && npm run docker:export && npm run allure:report"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ahmet Demir",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
