@@ -27,21 +27,19 @@ describe('Rydoo Login - Security Boundary Tests', () => {
 });
 
 describe('Happy Path Login Execution', () => {
+    const currentEnv = (Cypress.env('envName') || 'qa').toLowerCase();
+    const email = Cypress.env(`${currentEnv}_user`);
+    const password = Cypress.env(`${currentEnv}_pass`);
+
     beforeEach(() => {
         cy.visit('/login'); 
     });
-    it(`should login successfully on QA`, () => {
 
-    cy.location('hostname', { timeout: 20000 }).should('include', 'accounts.rydoo.com');
+    it(`should login successfully on ${currentEnv.toUpperCase()} envirenment`, () => {
+        
+        expect(email, `Credential check for ${currentEnv}`).to.not.be.undefined;
+        cy.location('hostname', { timeout: 20000 }).should('include', 'accounts.rydoo.com');
 
-    const env = (Cypress.env('envName') || 'qa').toLowerCase();
-        const email = Cypress.env(`${env}_user`);
-        const password = Cypress.env(`${env}_pass`);
-
-        // Fail fast with a clear message if credentials are missing in CI or local runs
-        expect(email, `Cypress env '${env}_user' must be defined (see cypress.env.json or CI secrets)`).to.be.a('string').and.not.be.empty;
-        expect(password, `Cypress env '${env}_pass' must be defined (see cypress.env.json or CI secrets)`).to.be.a('string').and.not.be.empty;
-
-    cy.login_func(email, password);
+        cy.login_func(email, password);
     });
 });

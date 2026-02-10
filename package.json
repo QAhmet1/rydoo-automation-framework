@@ -22,7 +22,7 @@
     "docker:export": "docker cp rydoo-container:/app/allure-results/. ./allure-results",
     "allure:report": "allure generate allure-results --clean -o allure-report && allure open allure-report",
 
-    "full:qa": "npm run docker:build && npm run docker:run:qa && npm run docker:export && npm run allure:report",
+    "full:qa": "npm run allure:clear && npm run docker:build && npm run docker:run:qa && npm run docker:export && npm run allure:report",
     "full:prod": "npm run docker:build && npm run docker:run:prod && npm run docker:export && npm run allure:report"
   },
   "keywords": [],
