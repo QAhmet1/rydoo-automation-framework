@@ -1,0 +1,19 @@
+# Do NOT copy local dependencies; Docker will run 'npm install' internally
+node_modules/
+
+# Do NOT copy local reports/results
+allure-results/
+allure-report/
+cypress/screenshots/
+cypress/videos/
+
+# Git history (Not needed inside container)
+.git/
+.gitignore
+
+# Documentation
+README.md
+
+# Docker related (The file itself)
+Dockerfile
+.dockerignore

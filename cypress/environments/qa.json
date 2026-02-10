@@ -1,0 +1,5 @@
+{
+  "baseUrl": "https://app.rydoo.com",
+  "envName": "QA",
+  "description": "Quality Assurance Environment"
+}

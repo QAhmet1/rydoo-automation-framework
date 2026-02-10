@@ -1,0 +1,16 @@
+{
+  "errorMessage": "Sorry, your email or password was incorrect. Please try again.",
+  "securityErrorMessage": "We're not able to make a request. Please try again later.",
+  "standardScenarios": [
+    { "name": "Wrong Password", "email": "ahmet@test.com", "pass": "wrongpass123" },
+    { "name": "Unregistered User", "email": "newuser@rydoo.com", "pass": "anypass" },
+    { "name": "Special Characters", "email": "ahmet!#$", "pass": "123456" },
+    { "name": "SQL Bypass Attempt", "email": "admin' --", "pass": "anypass" },
+    { "name": "HTML Injection", "email": "<b>Test</b>", "pass": "anypass" }
+    
+  ],
+  "securityPayloads": [
+    { "name": "SQL Injection Attempt", "value": "' OR 1=1--" },
+    { "name": "XSS Injection Attempt", "value": "<script>alert(1)</script>" }
+  ]
+}

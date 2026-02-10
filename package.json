@@ -1,0 +1,36 @@
+{
+  "name": "rydoo-automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "// --- Local Execution ---": "Run tests directly on your machine",
+    "allure:clear": "rm -rf allure-results allure-report cypress/screenshots cypress/videos",
+    "allure:env": "node setup-allure.js",
+    
+    "test:qa": "npm run allure:clear && npm run allure:env && cypress run --env envName=qa,allure=true",
+    "test:prod": "npm run allure:clear && npm run allure:env && cypress run --env envName=prod,allure=true",
+
+    "// --- Docker Execution (Build Once, Run Anywhere) ---": "Isolate execution in containers",
+    "docker:build": "docker build -t rydoo-automation .",
+    "docker:clean": "docker rm -f rydoo-container || true",
+    
+    "docker:run:qa": "npm run docker:clean && docker run --name rydoo-container -e envName=qa rydoo-automation",
+    "docker:run:prod": "npm run docker:clean && docker run --name rydoo-container -e envName=prod rydoo-automation",
+
+    "// --- Full Pipeline Simulation (Local) ---": "One command to rule them all",
+    "docker:export": "docker cp rydoo-container:/app/allure-results/. ./allure-results",
+    "allure:report": "allure generate allure-results --clean -o allure-report && allure open allure-report",
+
+    "full:qa": "npm run docker:build && npm run docker:run:qa && npm run docker:export && npm run allure:report",
+    "full:prod": "npm run docker:build && npm run docker:run:prod && npm run docker:export && npm run allure:report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@shelex/cypress-allure-plugin": "^2.41.2",
+    "cypress": "^15.10.0"
+  }
+}
