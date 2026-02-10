@@ -1,4 +1,3 @@
-// Code explanations are in English [cite: 2026-01-05, 2026-01-29]
 const { defineConfig } = require("cypress");
 const allureWriter = require('@shelex/cypress-allure-plugin/writer');
 const fs = require('fs-extra');

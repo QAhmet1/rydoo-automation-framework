@@ -1,4 +1,3 @@
-# Code explanations are in English [cite: 2026-01-05]
 FROM cypress/included:13.6.0
 WORKDIR /app
 COPY package*.json ./
